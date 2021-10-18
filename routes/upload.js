@@ -40,6 +40,8 @@ router.post('/', upload.single('vocal_sequence_file'), function (req, res) {
 
     const filestream = fs.createReadStream(`uploads/${ccsFileName}`);
     filestream.pipe(res);
+    fs.unlink(`uploads/${fileName}`, (err) => err ? console.log(err) : console.log(`${fileName} 를 정상적으로 삭제했습니다`));
+    fs.unlink(`uploads/${ccsFileName}`, (err) => err ? console.log(err) : console.log(`${ccsFileName} 를 정상적으로 삭제했습니다`));
 
 });
 
