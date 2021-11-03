@@ -21,9 +21,10 @@ const upload = multer({storage: storage});
 
 router.post('/', upload.single('vocal_sequence_file'), function (req, res) {
 
+    let isHiragana = req.body.is_hiragana === "1";
     let fileName = req.file.filename;
     let vsqXML = XML2JSON(`uploads/${fileName}`);
-    let result = fromVSQX(vsqXML, true);
+    let result = fromVSQX(vsqXML, isHiragana);
     let cssObject = toCCS(result);
 
     // obj to file
